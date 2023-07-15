@@ -7,21 +7,25 @@ export default function (props) {
     //console.log('Uppercase was clicked'+text);
     let newText = text.toUpperCase();
     setText(newText);
+    props.showAlert("Converted to UpperCase", "success");
   };
   const handleLowClick = () => {
     let newText = text.toLowerCase();
     setText(newText);
+    props.showAlert("Converted to LowerCase", "success");
   };
   const handleCrClick = () => {
     setText("");
+    props.showAlert("Text Cleared", "success");
   };
   const handleCcClick = () => {
     copy(text);
-    alert(`You have copied "${text}"`);
+    props.showAlert("Copied to Clipboard", "success");
   };
   const handleReClick = () => {
     let newText = text.replace(/\s+/g, " ").trim();
     setText(newText);
+    props.showAlert("Removed extra spaces", "success");
   };
 
   const handleOnChange = (event) => {
@@ -38,7 +42,10 @@ export default function (props) {
             className="form-control"
             value={text}
             onChange={handleOnChange}
-            style={{backgroundColor: props.mode==='dark'?'#000080':'white',color:props.mode==='dark'?'white':'#042743'}}
+            style={{
+              backgroundColor: props.mode === "dark" ? "#042743" : "white",
+              color: props.mode === "dark" ? "white" : "#042743",
+            }}
             id="myBox"
             rows="8"
           ></textarea>
@@ -61,9 +68,15 @@ export default function (props) {
       </div>
       <div className="container my-4">
         <h4>Your text summary</h4>
-        <p>Number of words : {text.split(" ").length}</p>
+        <p>
+          Number of words :{" "}
+          {text.trim() === "" ? 0 : text.trim().split(/\s+/).length}
+        </p>
         <p>Number of characters : {text.length}</p>
-        <p>Reading time in seconds: {0.48 * text.split(" ").length}</p>
+        <p>
+          Reading time in seconds:{" "}
+          {text.trim() === "" ? 0 : 0.48 * text.trim().split(/\s+/).length}
+        </p>
         <h4>Preview</h4>
         <p>{text}</p>
       </div>

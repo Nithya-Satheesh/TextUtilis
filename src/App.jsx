@@ -7,27 +7,32 @@ import TextForm from "./Components/TextForm";
 import Alert from "./Components/Alert";
 
 function App() {
-  const [mode, setmode] = useState("light");
-  const [modeText, setmodeText] = useState("Enable Dark Mode");
-  const [alert, setalert] = useState(null);
+  const [mode, setMode] = useState("light");
+  const [modeText, setModeText] = useState("Enable Dark Mode");
+  const [alert, setAlert] = useState(null);
 
   const showAlert = (message, type) => {
-    setalert({
+    setAlert({
       msg: message,
       type: type,
     });
+    setTimeout(() => {
+      setAlert(null);
+    }, 2000);
   };
   const toggleMode = () => {
     if (mode === "light") {
-      setmode("dark");
+      setMode("dark");
       document.body.style.backgroundColor = "#042743";
       document.body.style.color = "white";
-      setmodeText("Enable Light Mode");
+      setModeText("Enable Light Mode");
+      showAlert("Dark mode has been enabled", "success");
     } else {
-      setmode("light");
+      setMode("light");
       document.body.style.backgroundColor = "white";
-      setmodeText("Enable Dark Mode");
+      setModeText("Enable Dark Mode");
       document.body.style.color = "black";
+      showAlert("Light mode has been enabled", "success");
     }
   };
 
@@ -45,6 +50,7 @@ function App() {
           heading="TextUtils"
           subheading="Enter the text to analyse below"
           mode={mode}
+          showAlert={showAlert}
         />
       </div>
     </>
