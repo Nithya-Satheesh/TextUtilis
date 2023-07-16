@@ -35,9 +35,9 @@ export default function (props) {
   return (
     <>
       <div className="container my-3">
-        <h1>{props.heading}</h1>
-        <h4>{props.subheading}</h4>
-        <div className="mb-3">
+        <h1 className="mb-4" style={{textAlign:'center'}}>{props.heading}</h1>
+        
+        <div className="mb-4">
           <textarea
             className="form-control"
             value={text}
@@ -50,19 +50,19 @@ export default function (props) {
             rows="8"
           ></textarea>
         </div>
-        <button className="btn btn-primary mx-2" onClick={handleUpClick}>
+        <button disabled={text.length===0} className="btn btn-primary mx-2" onClick={handleUpClick}>
           Convert to Uppercase
         </button>
-        <button className="btn btn-primary mx-2" onClick={handleLowClick}>
+        <button disabled={text.length===0} className="btn btn-primary mx-2" onClick={handleLowClick}>
           Convert to Lowercase
         </button>
-        <button className="btn btn-danger mx-2" onClick={handleCrClick}>
+        <button disabled={text.length===0} className="btn btn-danger mx-2" onClick={handleCrClick}>
           Clear Text
         </button>
-        <button className="btn btn-primary mx-2" onClick={handleCcClick}>
+        <button disabled={text.length===0} className="btn btn-primary mx-2" onClick={handleCcClick}>
           Copy to Clipboard
         </button>
-        <button className="btn btn-primary mx-2" onClick={handleReClick}>
+        <button disabled={text.length===0} className="btn btn-primary mx-2" onClick={handleReClick}>
           Remove extra spaces
         </button>
       </div>
@@ -72,13 +72,13 @@ export default function (props) {
           Number of words :{" "}
           {text.trim() === "" ? 0 : text.trim().split(/\s+/).length}
         </p>
-        <p>Number of characters : {text.length}</p>
+        <p>Number of characters : {text.trim() === "" ? 0: text.length}</p>
         <p>
           Reading time in seconds:{" "}
           {text.trim() === "" ? 0 : 0.48 * text.trim().split(/\s+/).length}
         </p>
         <h4>Preview</h4>
-        <p>{text}</p>
+        <p>{text.length>0?text:"Nothing to preview"}</p>
       </div>
     </>
   );

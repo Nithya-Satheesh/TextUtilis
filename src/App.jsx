@@ -56,14 +56,13 @@ function App() {
               path="/"
               element={
                 <TextForm
-                  heading="TextUtils"
-                  subheading="Enter the text to analyse below"
+                  heading="TextUtils - Word Counter | Charcter Counter | UpperCase | LowerCase"
                   mode={mode}
                   showAlert={showAlert}
                 />
               }
             ></Route>
-            <Route exact path="/about" element={<About />} />
+            <Route exact path="/about" element={<About mode={mode} />} />
           </Routes>
         </div>
       </BrowserRouter>
